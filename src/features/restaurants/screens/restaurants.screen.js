@@ -17,7 +17,7 @@ const RestaurantList = styled(FlatList).attrs({
   },
 })``;
 const Loading = styled(ActivityIndicator)`
-  marging-left: 25px;
+  margin-left: -25px;
 `;
 const LoadingContainer = styled.View`
   position: absolute;
