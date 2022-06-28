@@ -20,7 +20,7 @@ export const RestaurantContextProvider = ({ children }) => {
         .then((results) => {
           setIsLoading(false);
           setRestaurants(results);
-          console.log(loc);
+          // console.log(loc);
         })
         .catch((err) => {
           setIsLoading(false);
@@ -32,7 +32,7 @@ export const RestaurantContextProvider = ({ children }) => {
     if (location) {
       const locationString = `${location.results[0].geometry.location.lat},${location.results[0].geometry.location.lng}`;
       retrieveRestaurants(locationString);
-      console.log(locationString);
+      // console.log(locationString);
     }
   }, [location]);
   return (
