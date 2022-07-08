@@ -1,11 +1,10 @@
 import React from "react";
-// import { RestaurantContextProvider } from "./src/services/restaurants/restaurants.context";
-// import { LocationContextProvider } from "./src/services/location/location.context";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 import { SafeArea } from "../../components/utility/safe-area.components";
-import { RestaurantsScreen } from "../../features/restaurants/screens/restaurants.screen";
+import { RestaurantsNavigator } from "./restaurant.navigator";
+// import { RestaurantsScreen } from "../../features/restaurants/screens/restaurants.screen";
 import { Text } from "react-native";
 
 const Tab = createBottomTabNavigator();
@@ -23,6 +22,7 @@ const createScreenOptions = ({ route }) => {
     ),
     tabBarActiveTintColor: "tomato",
     tabBarInactiveTintColor: "gray",
+    headerShown: false,
   };
 };
 const Settings = () => (
@@ -38,16 +38,12 @@ const Maps = () => (
 
 export const AppNavigator = () => {
   return (
-    // <LocationContextProvider>
-    //   <RestaurantContextProvider>
     <NavigationContainer>
       <Tab.Navigator screenOptions={createScreenOptions}>
-        <Tab.Screen name="Restaurants" component={RestaurantsScreen} />
+        <Tab.Screen name="Restaurants" component={RestaurantsNavigator} />
         <Tab.Screen name="Map" component={Maps} />
         <Tab.Screen name="Settings" component={Settings} />
       </Tab.Navigator>
     </NavigationContainer>
-    //   {/* </RestaurantContextProvider>
-    // </LocationContextProvider> */}
   );
 };
