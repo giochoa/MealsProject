@@ -12,9 +12,9 @@ const RestaurantStack = createStackNavigator();
 export const RestaurantsNavigator = () => {
   return (
     <RestaurantStack.Navigator
-      headerMode="off"
       screenOptions={{
         ...TransitionPresets.ModalPresentationIOS,
+        headerShown: false,
       }}
     >
       <RestaurantStack.Screen name="Restaurant" component={RestaurantsScreen} />
