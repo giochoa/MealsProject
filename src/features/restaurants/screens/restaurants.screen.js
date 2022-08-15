@@ -25,7 +25,7 @@ const LoadingContainer = styled.View`
 
 export const RestaurantsScreen = ({ navigation }) => {
   const { isLoading, restaurants } = useContext(RestaurantContext);
-  // const { favourites } = useContext(FavouritesContext);
+
   return (
     <SafeArea>
       {isLoading && (

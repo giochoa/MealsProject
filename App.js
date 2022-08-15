@@ -5,7 +5,7 @@ import React from "react";
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 import { RestaurantContextProvider } from "./src/services/restaurants/restaurants.context";
 import { LocationContextProvider } from "./src/services/location/location.context";
-import { FavouritesContext } from "./src/services/favourites/favourites.context";
+import { FavouritesContextProvider } from "./src/services/favourites/favourites.context";
 import { Navigation } from "./src/infrastructure/navigation/index";
 
 import { ThemeProvider } from "styled-components/native";
@@ -32,13 +32,13 @@ export default function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <FavouritesContext>
+        <FavouritesContextProvider>
           <LocationContextProvider>
             <RestaurantContextProvider>
               <Navigation />
             </RestaurantContextProvider>
           </LocationContextProvider>
-        </FavouritesContext>
+        </FavouritesContextProvider>
         <ExpoStatusBar style="auto" />
       </ThemeProvider>
     </>
