@@ -1,11 +1,12 @@
 /* eslint-disable react/react-in-jsx-scope */
-import React, { useState, useEffect } from "react";
+import React from "react";
 // import { Text } from "react-native";
 
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 import { RestaurantContextProvider } from "./src/services/restaurants/restaurants.context";
 import { LocationContextProvider } from "./src/services/location/location.context";
 import { FavouritesContextProvider } from "./src/services/favourites/favourites.context";
+import { AuthenticationContextProvider } from "./src/services/authentication/authentication.context";
 import { Navigation } from "./src/infrastructure/navigation/index";
 
 import { ThemeProvider } from "styled-components/native";
@@ -33,19 +34,6 @@ if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
 }
 export default function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  useEffect(() => {
-    firebase
-      .auth()
-      .signInWithEmailAndPassword("@gmail.com", "")
-      .then((user) => {
-        console.log(user);
-        setIsAuthenticated(true);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  }, []);
   const [oswaldLoaded] = useOswald({
     Oswald_400Regular,
   });
@@ -59,14 +47,16 @@ export default function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <FavouritesContextProvider>
-          <LocationContextProvider>
-            <RestaurantContextProvider>
-              <Navigation />
-            </RestaurantContextProvider>
-          </LocationContextProvider>
-        </FavouritesContextProvider>
-        <ExpoStatusBar style="auto" />
+        <AuthenticationContextProvider>
+          <FavouritesContextProvider>
+            <LocationContextProvider>
+              <RestaurantContextProvider>
+                <Navigation />
+              </RestaurantContextProvider>
+            </LocationContextProvider>
+          </FavouritesContextProvider>
+          <ExpoStatusBar style="auto" />
+        </AuthenticationContextProvider>
       </ThemeProvider>
     </>
   );
