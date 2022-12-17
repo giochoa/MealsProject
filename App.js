@@ -3,9 +3,9 @@ import React from "react";
 // import { Text } from "react-native";
 
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
-import { RestaurantContextProvider } from "./src/services/restaurants/restaurants.context";
-import { LocationContextProvider } from "./src/services/location/location.context";
-import { FavouritesContextProvider } from "./src/services/favourites/favourites.context";
+// import { RestaurantContextProvider } from "./src/services/restaurants/restaurants.context";
+// import { LocationContextProvider } from "./src/services/location/location.context";
+// import { FavouritesContextProvider } from "./src/services/favourites/favourites.context";
 import { AuthenticationContextProvider } from "./src/services/authentication/authentication.context";
 import { Navigation } from "./src/infrastructure/navigation/index";
 
@@ -48,13 +48,7 @@ export default function App() {
     <>
       <ThemeProvider theme={theme}>
         <AuthenticationContextProvider>
-          <FavouritesContextProvider>
-            <LocationContextProvider>
-              <RestaurantContextProvider>
-                <Navigation />
-              </RestaurantContextProvider>
-            </LocationContextProvider>
-          </FavouritesContextProvider>
+          <Navigation />
           <ExpoStatusBar style="auto" />
         </AuthenticationContextProvider>
       </ThemeProvider>
