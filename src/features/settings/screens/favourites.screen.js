@@ -7,6 +7,7 @@ import { RestaurantInfoCard } from "../../restaurants/components/restaurants-inf
 import { Text } from "../../../components/typography/text.component";
 import { RestaurantList } from "../../restaurants/components/restaurant-styles.component";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { FadeInView } from "../../../components/animations/fade.animation";
 import styled from "styled-components/native";
 
 const NoFavouritesArea = styled(SafeArea)`
@@ -27,7 +28,9 @@ export const FavouritesScreen = ({ navigation }) => {
               }
             >
               <Spacer position={"bottom"} size={"large"}>
-                <RestaurantInfoCard restaurant={item} />
+                <FadeInView>
+                  <RestaurantInfoCard restaurant={item} />
+                </FadeInView>
               </Spacer>
             </TouchableOpacity>
           );
