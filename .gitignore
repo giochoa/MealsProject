@@ -12,3 +12,5 @@ web-build/
 
 # macOS
 .DS_Store
+#We added this for the firebase functions
+*/node_modules/**/*
