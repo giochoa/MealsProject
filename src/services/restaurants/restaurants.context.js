@@ -14,19 +14,19 @@ export const RestaurantContextProvider = ({ children }) => {
     setIsLoading(true);
     setRestaurants([]);
 
-    setTimeout(() => {
-      restaurantRequest(loc)
-        .then(restaurantTransform)
-        .then((results) => {
-          setIsLoading(false);
-          setRestaurants(results);
-          // console.log(loc);
-        })
-        .catch((err) => {
-          setIsLoading(false);
-          setError(err);
-        });
-    }, 2000);
+    // setTimeout(() => {
+    restaurantRequest(loc)
+      .then(restaurantTransform)
+      .then((results) => {
+        setIsLoading(false);
+        setRestaurants(results);
+        // console.log(loc);
+      })
+      .catch((err) => {
+        setIsLoading(false);
+        setError(err);
+      });
+    // }, 2000);
   };
   useEffect(() => {
     if (location) {
