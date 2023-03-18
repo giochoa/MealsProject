@@ -1,9 +1,12 @@
 // import { mocks, mockImages } from "./mock";
 import camelize from "camelize";
+import { host } from "../../utils/env";
 
 export const restaurantRequest = (location) => {
+  // console.log(process.env);
   return fetch(
-    `http://127.0.0.1:5001/mealstogo-fb4e7/us-central1/placesNearby?location=${location}`
+    // `http://127.0.0.1:5001/mealstogo-fb4e7/us-central1/placesNearby?location=${location}`
+    `${host}placesNearby?location=${location}`
   ).then((res) => {
     return res.json();
   });
