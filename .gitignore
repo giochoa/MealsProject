@@ -14,3 +14,7 @@ web-build/
 .DS_Store
 #We added this for the firebase functions
 */node_modules/**/*
+firebase-debug.log
+ui-debug.log
+.runtimeconfig.json
+
