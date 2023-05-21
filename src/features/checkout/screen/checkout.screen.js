@@ -1,13 +1,9 @@
 import React from "react";
-import { Text } from "../../../components/typography/text.component";
-import { Spacer } from "../../../components/spacer/spacer";
+import { CreditCardInput } from "../components/credit-card.component";
+import { SafeArea } from "../../../components/utility/safe-area.components";
 
-export const CheckoutScreen = () => {
-  return (
-    <>
-      <Spacer position="top" size="large">
-        <Text variant="error">TEST</Text>
-      </Spacer>
-    </>
-  );
-};
+export const CheckoutScreen = () => (
+  <SafeArea>
+    <CreditCardInput />
+  </SafeArea>
+);
