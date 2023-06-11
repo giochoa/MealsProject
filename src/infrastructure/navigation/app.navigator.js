@@ -8,6 +8,7 @@ import { MapScreen } from "../../features/map/screens/map.screen";
 import { CheckoutScreen } from "../../features/checkout/screen/checkout.screen";
 // import { AuthenticationContext } from "../../services/authentication/authentication.context";
 // import { RestaurantsScreen } from "../../features/restaurants/screens/restaurants.screen";
+import { CartContextProvider } from "../../services/cart/cart.context";
 import { FavouritesContextProvider } from "../../services/favourites/favourites.context";
 import { LocationContextProvider } from "../../services/location/location.context";
 import { RestaurantContextProvider } from "../../services/restaurants/restaurants.context";
@@ -39,12 +40,14 @@ export const AppNavigator = () => {
     <FavouritesContextProvider>
       <LocationContextProvider>
         <RestaurantContextProvider>
-          <Tab.Navigator screenOptions={createScreenOptions}>
-            <Tab.Screen name="Restaurants" component={RestaurantsNavigator} />
-            <Tab.Screen name="Checkout" component={CheckoutScreen} />
-            <Tab.Screen name="Map" component={MapScreen} />
-            <Tab.Screen name="Settings" component={SettingsNavigator} />
-          </Tab.Navigator>
+          <CartContextProvider>
+            <Tab.Navigator screenOptions={createScreenOptions}>
+              <Tab.Screen name="Restaurants" component={RestaurantsNavigator} />
+              <Tab.Screen name="Checkout" component={CheckoutScreen} />
+              <Tab.Screen name="Map" component={MapScreen} />
+              <Tab.Screen name="Settings" component={SettingsNavigator} />
+            </Tab.Navigator>
+          </CartContextProvider>
         </RestaurantContextProvider>
       </LocationContextProvider>
     </FavouritesContextProvider>
