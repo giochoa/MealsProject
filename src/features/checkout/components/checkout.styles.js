@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { Avatar } from "react-native-paper";
-import { Icon } from "../../restaurants/components/restaurant-info-card.styles";
 
 export const CartContainer = styled.View`
   align-items: center;
