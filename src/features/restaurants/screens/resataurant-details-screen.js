@@ -7,7 +7,7 @@ import { Spacer } from "../../../components/spacer/spacer";
 import { OrderButton } from "../components/restaurant-styles.component";
 import { CartContext } from "../../../services/cart/cart.context";
 
-export const RestaurantDetailsScreen = ({ route }) => {
+export const RestaurantDetailsScreen = ({ route, navigation }) => {
   const [breakfastExpanded, setBreakfastExpanded] = useState(false);
   const [lunchExpanded, setLunchExpanded] = useState(false);
   const [dinnerExpanded, setDinnerExpanded] = useState(false);
@@ -66,6 +66,7 @@ export const RestaurantDetailsScreen = ({ route }) => {
           mode="contained"
           onPress={() => {
             addToCart({ item: "special", price: 1299 }, restaurant);
+            navigation.navigate("Checkout");
           }}
         >
           Order Now Only $12.99
