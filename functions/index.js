@@ -1,9 +1,11 @@
 const functions = require("firebase-functions");
 const { geocodeRequest } = require("./geocode");
 const { placesRequest } = require("./places");
+const { payRequest } = require("./pay");
 const { Client } = require("@googlemaps/google-maps-services-js");
+const stripeClient = require("stripe")(functions.config().key);
 //I think we are initiating this with an empty object since we are gonna be passing it with objects??
-const client = new Client({});
+const googleClient = new Client({});
 
 // // Create and deploy your first functions
 // // https://firebase.google.com/docs/functions/get-started
@@ -14,8 +16,11 @@ const client = new Client({});
 //   response.send("Hello from Firebase via Jack!");
 // });
 exports.geocode = functions.https.onRequest((request, response) => {
-  geocodeRequest(request, response, client);
+  geocodeRequest(request, response, googleClient);
 });
 exports.placesNearby = functions.https.onRequest((request, response) => {
-  placesRequest(request, response, client);
+  placesRequest(request, response, googleClient);
+});
+exports.pay = functions.https.onRequest((request, response) => {
+  placesRequest(request, response, stripeClient);
 });
