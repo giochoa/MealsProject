@@ -22,5 +22,5 @@ exports.placesNearby = functions.https.onRequest((request, response) => {
   placesRequest(request, response, googleClient);
 });
 exports.pay = functions.https.onRequest((request, response) => {
-  placesRequest(request, response, stripeClient);
+  payRequest(request, response, stripeClient);
 });

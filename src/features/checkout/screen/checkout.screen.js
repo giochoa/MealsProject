@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ScrollView } from "react-native";
 import { List } from "react-native-paper";
 import { Text } from "../../../components/typography/text.component";
@@ -14,10 +14,22 @@ import { CreditCardInput } from "../components/credit-card.component";
 import { SafeArea } from "../../../components/utility/safe-area.components";
 import { CartContext } from "../../../services/cart/cart.context";
 import { RestaurantInfoCard } from "../../restaurants/components/restaurants-info-card.components";
+import { payRequest } from "../../../services/checkout/checkout.services";
 
 export const CheckoutScreen = () => {
   const { cart, restaurant, sum, clearCart } = useContext(CartContext);
   const [name, setName] = useState("");
+  const [card, setCard] = useState(null);
+  const onPay = () => {
+    if (!card || !card.id) {
+      console.log("card error");
+      return;
+    }
+    payRequest("123", sum, name);
+  };
+  useEffect(() => {
+    onPay();
+  }, []);
   if (!cart.length || !restaurant) {
     return (
       <SafeArea>
