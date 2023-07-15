@@ -9,6 +9,7 @@ import {
   NameInput,
   PayButton,
   ClearButton,
+  PaymenProcessing,
 } from "../components/checkout.styles";
 import { CreditCardInput } from "../components/credit-card.component";
 import { SafeArea } from "../../../components/utility/safe-area.components";
@@ -20,16 +21,22 @@ export const CheckoutScreen = () => {
   const { cart, restaurant, sum, clearCart } = useContext(CartContext);
   const [name, setName] = useState("");
   const [card, setCard] = useState(null);
+  const [isLoading, setIsLoadig] = useState(false);
   const onPay = () => {
+    setIsLoadig(true);
     if (!card || !card.id) {
+      setIsLoadig(false);
       console.log("card error");
       return;
     }
-    payRequest("123", sum, name);
+    payRequest(card.id, sum, name)
+      .then((result) => {
+        setIsLoadig(false);
+      })
+      .catch((err) => {
+        setIsLoadig(false);
+      });
   };
-  useEffect(() => {
-    onPay();
-  }, []);
   if (!cart.length || !restaurant) {
     return (
       <SafeArea>
@@ -43,6 +50,7 @@ export const CheckoutScreen = () => {
   return (
     <SafeArea>
       <RestaurantInfoCard restaurant={restaurant} />
+      {isLoading && <PaymenProcessing />}
       <ScrollView>
         <Spacer position="left" size="medium">
           <Spacer position="top" size="large">
@@ -63,18 +71,26 @@ export const CheckoutScreen = () => {
           }}
         />
         <Spacer position="top" size="large">
-          {name.length > 0 && <CreditCardInput />}
+          {name.length > 0 && (
+            <CreditCardInput name={name} onSuccess={setCard} />
+          )}
         </Spacer>
         <Spacer position="top" size="xxl" />
         <PayButton
+          disabled={isLoading}
           icon="cash"
           mode="contained"
-          onPress={() => console.log("pay now")}
+          onPress={onPay}
         >
           Pay
         </PayButton>
-        <Spacer icon="cart-off" position="top" size="large">
-          <ClearButton mode="contained" onPress={clearCart}>
+        <Spacer position="top" size="large">
+          <ClearButton
+            disabled={isLoading}
+            icon="cart-off"
+            mode="contained"
+            onPress={clearCart}
+          >
             Clear Cart
           </ClearButton>
         </Spacer>
