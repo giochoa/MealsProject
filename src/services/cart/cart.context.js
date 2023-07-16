@@ -9,6 +9,36 @@ export const CartContextProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
   const [restaurant, setRestaurant] = useState(null);
   const [sum, setSum] = useState(0);
+  const saveCart = async (rst, crt, uid) => {
+    try {
+      const jsonValue = JSON.stringify({ restaurant: rst, cart: crt });
+      await AsyncStorage.setItem(`@cart-${uid}`, jsonValue);
+    } catch (e) {
+      console.log("error storing", e);
+    }
+  };
+  const loadCart = async (uid) => {
+    try {
+      const value = await AsyncStorage.getItem(`@cart-${uid}`);
+      if (value !== null) {
+        const { restaurant: rst, cart: crt } = JSON.parse(value);
+        setRestaurant(rst);
+        setCart(crt);
+      }
+    } catch (e) {
+      console.log("error storing", e);
+    }
+  };
+  useEffect(() => {
+    if (user && user.id) {
+      loadCart(user.id);
+    }
+  }, [user]);
+  useEffect(() => {
+    if (user && user.id) {
+      saveCart(restaurant, cart, user.id);
+    }
+  }, [restaurant, cart, user]);
   useEffect(() => {
     if (!cart.length) {
       setSum(0);

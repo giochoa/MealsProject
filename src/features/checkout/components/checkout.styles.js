@@ -34,7 +34,7 @@ export const ClearButton = styled(Button).attrs({
   align-self: center;
   padding: ${(props) => props.theme.space[2]};
 `;
-export const PaymenProcessing = styled(ActivityIndicator).attrs({
+export const PaymentProcessing = styled(ActivityIndicator).attrs({
   size: 128,
   animating: true,
   colors: Colors.blue300,

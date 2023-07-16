@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { ScrollView } from "react-native";
 import { List } from "react-native-paper";
 import { Text } from "../../../components/typography/text.component";
@@ -9,7 +9,7 @@ import {
   NameInput,
   PayButton,
   ClearButton,
-  PaymenProcessing,
+  PaymentProcessing,
 } from "../components/checkout.styles";
 import { CreditCardInput } from "../components/credit-card.component";
 import { SafeArea } from "../../../components/utility/safe-area.components";
@@ -17,24 +17,31 @@ import { CartContext } from "../../../services/cart/cart.context";
 import { RestaurantInfoCard } from "../../restaurants/components/restaurants-info-card.components";
 import { payRequest } from "../../../services/checkout/checkout.services";
 
-export const CheckoutScreen = () => {
+export const CheckoutScreen = ({ navigation }) => {
   const { cart, restaurant, sum, clearCart } = useContext(CartContext);
   const [name, setName] = useState("");
   const [card, setCard] = useState(null);
-  const [isLoading, setIsLoadig] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const onPay = () => {
-    setIsLoadig(true);
+    setIsLoading(true);
     if (!card || !card.id) {
-      setIsLoadig(false);
-      console.log("card error");
+      setIsLoading(false);
+      navigation.navigate("CheckoutErrorScreen", {
+        error: "Please fill in a valid credit card",
+      });
       return;
     }
     payRequest(card.id, sum, name)
       .then((result) => {
-        setIsLoadig(false);
+        setIsLoading(false);
+        clearCart();
+        navigation.navigate("CheckoutSuccessScreen");
       })
       .catch((err) => {
-        setIsLoadig(false);
+        setIsLoading(false);
+        navigation.navigate("CheckoutErrorScreen", {
+          error: err,
+        });
       });
   };
   if (!cart.length || !restaurant) {
@@ -50,7 +57,7 @@ export const CheckoutScreen = () => {
   return (
     <SafeArea>
       <RestaurantInfoCard restaurant={restaurant} />
-      {isLoading && <PaymenProcessing />}
+      {isLoading && <PaymentProcessing />}
       <ScrollView>
         <Spacer position="left" size="medium">
           <Spacer position="top" size="large">
@@ -72,7 +79,15 @@ export const CheckoutScreen = () => {
         />
         <Spacer position="top" size="large">
           {name.length > 0 && (
-            <CreditCardInput name={name} onSuccess={setCard} />
+            <CreditCardInput
+              name={name}
+              onSuccess={setCard}
+              onError={() =>
+                navigation.navigate("CheckoutErrorScreen", {
+                  error: "Something went wrong processing your credit card",
+                })
+              }
+            />
           )}
         </Spacer>
         <Spacer position="top" size="xxl" />

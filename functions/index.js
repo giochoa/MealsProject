@@ -3,7 +3,7 @@ const { geocodeRequest } = require("./geocode");
 const { placesRequest } = require("./places");
 const { payRequest } = require("./pay");
 const { Client } = require("@googlemaps/google-maps-services-js");
-const stripeClient = require("stripe")(functions.config().key);
+const stripeClient = require("stripe")(functions.config().stripe.key);
 //I think we are initiating this with an empty object since we are gonna be passing it with objects??
 const googleClient = new Client({});
 
