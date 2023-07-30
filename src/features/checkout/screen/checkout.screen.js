@@ -26,7 +26,7 @@ export const CheckoutScreen = ({ navigation }) => {
     setIsLoading(true);
     if (!card || !card.id) {
       setIsLoading(false);
-      navigation.navigate("CheckoutErrorScreen", {
+      navigation.navigate("CheckoutError", {
         error: "Please fill in a valid credit card",
       });
       return;
@@ -35,11 +35,11 @@ export const CheckoutScreen = ({ navigation }) => {
       .then((result) => {
         setIsLoading(false);
         clearCart();
-        navigation.navigate("CheckoutSuccessScreen");
+        navigation.navigate("CheckoutSuccess");
       })
       .catch((err) => {
         setIsLoading(false);
-        navigation.navigate("CheckoutErrorScreen", {
+        navigation.navigate("CheckoutError", {
           error: err,
         });
       });
@@ -82,11 +82,11 @@ export const CheckoutScreen = ({ navigation }) => {
             <CreditCardInput
               name={name}
               onSuccess={setCard}
-              onError={() =>
-                navigation.navigate("CheckoutErrorScreen", {
+              onError={() => {
+                navigation.navigate("CheckoutError", {
                   error: "Something went wrong processing your credit card",
-                })
-              }
+                });
+              }}
             />
           )}
         </Spacer>
