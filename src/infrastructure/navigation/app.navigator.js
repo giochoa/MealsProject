@@ -13,6 +13,8 @@ import { FavouritesContextProvider } from "../../services/favourites/favourites.
 import { LocationContextProvider } from "../../services/location/location.context";
 import { RestaurantContextProvider } from "../../services/restaurants/restaurants.context";
 import { SettingsNavigator } from "./settings.navigator";
+import { colors } from "../theme/colors";
+
 // import { Text, Button } from "react-native";
 
 const Tab = createBottomTabNavigator();
@@ -29,8 +31,8 @@ const createScreenOptions = ({ route }) => {
     tabBarIcon: ({ size, color }) => (
       <Ionicons name={iconName} size={size} color={color} />
     ),
-    tabBarActiveTintColor: "tomato",
-    tabBarInactiveTintColor: "gray",
+    tabBarActiveTintColor: colors.brand.primary,
+    tabBarInactiveTintColor: colors.brand.muted,
     headerShown: false,
   };
 };
