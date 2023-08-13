@@ -4,6 +4,8 @@ import { Text } from "react-native";
 
 export const RestaurantCard = styled(Card)`
   background-color: ${(props) => props.theme.colors.bg.primary};
+  width: 95%;
+  align-self: center;
 `;
 export const RestaurantCardCover = styled(Card.Cover)`
   background-color: ${(props) => props.theme.colors.bg.primary};

@@ -69,14 +69,16 @@ export const SettingsScreen = ({ navigation }) => {
             title="Favourites"
             description="View your favourites"
             left={(props) => (
-              <List.Icon {...props} color="black" icon="heart" />
+              <List.Icon {...props} color={colors.ui.error} icon="heart" />
             )}
             onPress={() => navigation.navigate("Favourites")}
           />
           <Spacer />
           <SettingsItem
             title="Logout"
-            left={(props) => <List.Icon {...props} color="black" icon="door" />}
+            left={(props) => (
+              <List.Icon {...props} color={colors.ui.secondary} icon="door" />
+            )}
             onPress={onLogout}
           />
           <Spacer />
